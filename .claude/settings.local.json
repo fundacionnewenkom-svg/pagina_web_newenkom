@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Get-Item \"$env:USERPROFILE\\\\Desktop\\\\Guias_DEMRE\\\\Temario_PAES_M2_2027.pdf\" | Format-List Name, Length, FullName, CreationTime)",
+      "PowerShell(Get-ChildItem \"$env:USERPROFILE\\\\Desktop\" | Select-Object Name, FullName | Format-Table -AutoSize)",
+      "PowerShell(python \"C:\\\\temp_paes\\\\classify_paes.py\" 2>&1)",
+      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\DELL\\\\OneDrive\\\\Desktop\\\\preguntas oficiales m2\" | Sort-Object Name | Select-Object Name, @{N=\"KB\";E={[math]::Round\\($_.Length/1024,1\\)}})"
+    ]
+  }
+}

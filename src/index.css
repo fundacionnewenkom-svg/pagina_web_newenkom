@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tailwindcss";
+
+/* ─── Design tokens ───────────────────────────────────────────────── */
+:root {
+  --bg:        #07070f;
+  --surface:   #0e0e1a;
+  --border:    rgba(255,255,255,0.07);
+  --border-hi: rgba(255,255,255,0.14);
+  --red:       #e02020;
+  --red-dim:   rgba(224,32,32,0.15);
+  --blue:      #1a56e8;
+  --text-1:    #f5f5fa;          /* headings */
+  --text-2:    #9898b0;          /* body / secondary */
+  --text-3:    #5a5a72;          /* captions / labels */
+  --section:   clamp(6rem, 10vw, 9rem);
+}
+
+/* ─── Base ────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: 'Raleway', system-ui, sans-serif;
+  background-color: var(--bg);
+  color: var(--text-1);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  text-align: left;
+  border: none;
+}
+
+::selection {
+  background: var(--red);
+  color: #fff;
+}
+
+/* ─── Scrollbar ───────────────────────────────────────────────────── */
+::-webkit-scrollbar       { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--red); border-radius: 2px; }
+
+/* ─── Section rhythm ──────────────────────────────────────────────── */
+.section-py { padding-top: var(--section); padding-bottom: var(--section); }
+
+/* ─── Utility: noise texture overlay ─────────────────────────────── */
+.noise::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  opacity: 0.025;
+  mix-blend-mode: overlay;
+}
+
+/* ─── Form focus ring ────────────────────────────────────────────── */
+.field-input {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  color: var(--text-1);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  appearance: none;
+}
+.field-input::placeholder { color: var(--text-3); }
+.field-input:focus {
+  border-color: var(--red);
+  box-shadow: 0 0 0 3px rgba(224,32,32,0.12);
+}
+
+/* ─── Reduced motion ──────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
+}
